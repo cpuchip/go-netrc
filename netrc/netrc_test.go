@@ -108,6 +108,14 @@ func TestParse(t *testing.T) {
 	testExpected(n, t)
 }
 
+func TestParseLong(t *testing.T) {
+	r := netrcReader("examples/long.netrc", t)
+	_, err := Parse(r)
+	if err != nil {
+		t.Fatal(err)
+	}
+}
+
 func TestParseFile(t *testing.T) {
 	n, err := ParseFile("examples/good.netrc")
 	if err != nil {
