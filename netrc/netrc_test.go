@@ -8,17 +8,16 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"strings"
 	"testing"
 )
 
 var expectedMachines = []*Machine{
-	&Machine{Name: "mail.google.com", Login: "joe@gmail.com", Password: "somethingSecret", Account: "justagmail"},
-	&Machine{Name: "ray", Login: "demo", Password: "mypassword", Account: ""},
-	&Machine{Name: "weirdlogin", Login: "uname", Password: "pass#pass", Account: ""},
-	&Machine{Name: "", Login: "anonymous", Password: "joe@example.com", Account: ""},
+	{Name: "mail.google.com", Login: "joe@gmail.com", Password: "somethingSecret", Account: "justagmail"},
+	{Name: "ray", Login: "demo", Password: "mypassword", Account: ""},
+	{Name: "weirdlogin", Login: "uname", Password: "pass#pass", Account: ""},
+	{Name: "", Login: "anonymous", Password: "joe@example.com", Account: ""},
 }
 var expectedMacros = Macros{
 	"allput":  "put src/*",
@@ -185,7 +184,7 @@ func TestNetrcFindMachine(t *testing.T) {
 
 func TestMarshalText(t *testing.T) {
 	// load up expected netrc Marshal output
-	expected, err := ioutil.ReadAll(netrcReader("examples/good.netrc", t))
+	expected, err := io.ReadAll(netrcReader("examples/good.netrc", t))
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -559,7 +558,7 @@ func TestNewFile(t *testing.T) {
 }
 
 func netrcReader(filename string, t *testing.T) io.Reader {
-	b, err := ioutil.ReadFile(filename)
+	b, err := os.ReadFile(filename)
 	if err != nil {
 		t.Fatal(err)
 	}

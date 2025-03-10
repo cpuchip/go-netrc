@@ -155,7 +155,6 @@ func (n *Netrc) insertMachineTokensBeforeDefault(m *Machine) {
 	}
 	// didn't find a default, just add the newtokens to the end
 	n.tokens = append(n.tokens, newtokens...)
-	return
 }
 
 func (n *Netrc) RemoveMachine(name string) {
@@ -349,7 +348,7 @@ func newToken(rawb []byte) (*token, error) {
 			t.kind = tkComment // this is a comment
 			return &t, nil
 		}
-		return &t, fmt.Errorf("keyword expected; got " + string(tkind))
+		return &t, fmt.Errorf("keyword expected; got %s", string(tkind))
 	}
 	return &t, nil
 }

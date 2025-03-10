@@ -1,3 +1,3 @@
-module github.com/bgentry/go-netrc
+module github.com/cpuchip/go-netrc
 
-go 1.21.3
+go 1.24.1
