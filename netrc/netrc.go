@@ -47,7 +47,7 @@ type Netrc struct {
 // is a “default” machine, the “default” machine is returned. Otherwise, nil
 // is returned.
 func (n *Netrc) FindMachine(name string) (m *Machine) {
-	// TODO(bgentry): not safe for concurrency
+	// TODO: not safe for concurrency
 	var def *Machine
 	for _, m = range n.machines {
 		if m.Name == name {
@@ -66,7 +66,7 @@ func (n *Netrc) FindMachine(name string) (m *Machine) {
 // MarshalText implements the encoding.TextMarshaler interface to encode a
 // Netrc into text format.
 func (n *Netrc) MarshalText() (text []byte, err error) {
-	// TODO(bgentry): not safe for concurrency
+	// TODO: not safe for concurrency
 	for i := range n.tokens {
 		switch n.tokens[i].kind {
 		case tkComment, tkDefault, tkWhitespace: // always append these types
